@@ -15,8 +15,9 @@ func NewDriver(stream io.ReadWriter) (e *Driver) {
 }
 
 type Driver struct {
-	stream            io.ReadWriter
-	requestChan       chan elkRequest
-	listenChan        chan string
-	zoneChangeHandler func(ZoneChangeUpdate)
+	stream                    io.ReadWriter
+	requestChan               chan elkRequest
+	listenChan                chan string
+	zoneChangeHandler         func(ZoneChangeUpdate)
+	armingStatusReportHandler func(ArmingStatusReport)
 }
