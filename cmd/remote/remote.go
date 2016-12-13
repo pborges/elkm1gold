@@ -24,19 +24,15 @@ func main() {
 	writeLock = new(sync.Mutex)
 
 	if len(os.Args) < 4 {
-		log.Printf("usage: %s <serial port> <baud> <tcp port>\n", os.Args[0])
+		log.Printf("usage: %s <serial port> <baud> <addr>\n", os.Args[0])
 		os.Exit(1)
 	}
 
 	serialPortName := os.Args[1]
+	addr := os.Args[3]
 	baud, err := strconv.Atoi(os.Args[2])
 	if err != nil {
 		log.Println("[ERROR] Error parsing baud")
-		os.Exit(1)
-	}
-	tcpPort, err := strconv.Atoi(os.Args[3])
-	if err != nil {
-		log.Println("[ERROR] Error parsing tcp port")
 		os.Exit(1)
 	}
 
@@ -47,9 +43,9 @@ func main() {
 	}
 	serialPort.SetSpeed(baud)
 
-	l, err := net.Listen("tcp", ":" + strconv.Itoa(tcpPort))
+	l, err := net.Listen("tcp", addr)
 	if err != nil {
-		log.Printf("[ERROR] Unable to open Listen on Port %d %+v\n", tcpPort, err)
+		log.Printf("[ERROR] Unable to open Listen on Port %s %+v\n", addr, err)
 		os.Exit(1)
 	}
 	defer l.Close()
