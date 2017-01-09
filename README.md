@@ -2,3 +2,5 @@
 Go code used to control the elk m1 gold alarm system, includes a binary to broadcast the serial port over ethernet
 
 not ready yet...
+
+I recomend https://github.com/pborges/elkm1grpc as its being used in "production" (aka my house)
